@@ -8,6 +8,7 @@ class ViewModel:
         self.view = view()
         self.chatlist = []
         self.last_question = ""
+        self.erased = False
 
         self.view.enterhook.append(self.enterfunc)
         self.view.reverthook.append(self.revertfunc)
@@ -31,6 +32,7 @@ class ViewModel:
     def enterfunc(self, text):
         print(text)
         self.last_question = text
+        self.erased = False
         self.threadevent.set()
 
     def update_log(self):
@@ -38,9 +40,20 @@ class ViewModel:
 
     def revertfunc(self):
         print("revert")
+        if len(self.chatlist) < 2:
+            return
+        del self.chatlist[-1]
+        del self.chatlist[-1]
+        self.update_log()
+        self.erased = True
 
     def retryfunc(self):
         print("retry")
+        if not self.erased:
+            self.revertfunc()
+        self.threadevent.set()
+        self.update_log()
+        self.erased = False
 
     def getoutputfunc(self):
         print("register")

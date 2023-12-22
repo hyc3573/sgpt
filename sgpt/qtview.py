@@ -86,12 +86,10 @@ class View(QMainWindow):
             f(text)
 
     def revert(self):
-        self.revertfunc()
         for f in self.reverthook:
             f()
 
     def retry(self):
-        self.retryfunc()
         for f in self.retryhook:
             f()
 
