@@ -2,7 +2,7 @@ import openai
 import os
 import langchain
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
